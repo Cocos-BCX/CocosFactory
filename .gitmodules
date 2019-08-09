@@ -1,0 +1,3 @@
+[submodule "cocos-bcx-node-bin"]
+	path = cocos-bcx-node-bin
+	url = https://github.com/Cocos-BCX/cocos-bcx-node-bin.git
