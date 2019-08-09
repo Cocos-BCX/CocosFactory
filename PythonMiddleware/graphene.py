@@ -2,6 +2,7 @@ import json
 import logging
 import random
 import re
+import os
 from datetime import datetime, timedelta
 from PythonMiddlewareapi.graphenenoderpc import GrapheneNodeRPC
 from PythonMiddlewarebase.account import PrivateKey, PublicKey
@@ -2432,3 +2433,20 @@ class Graphene(object):
             raise ValueError("You need to provide a file name")
         file_info = self.rpc.lookup_file(file)
         return file_info
+
+    def start(self):  # 1.create testnet 2.modify get_dynamic_global_properties
+        os.system("cd ../scripts/chain/single_witness_node")
+        os.system("nohup ./witness_node --genesis-json genesis.json >> witness_node.log 2>&1 &")
+    
+    def stop(self):  # stop testnet
+        os.system("pkill witness_node")
+    
+    def resume(self):  # resume testnet
+        os.system("")
+    
+    def reset(self):  # r testnet
+        os.system("")
+
+   def build_contract(self):  # resume testnet
+        os.system("")
+
