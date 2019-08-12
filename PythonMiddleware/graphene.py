@@ -2435,18 +2435,31 @@ class Graphene(object):
         return file_info
 
     def start(self):  # 1.create testnet 2.modify get_dynamic_global_properties
-        os.system("cd ../scripts/chain/single_witness_node")
-        os.system("nohup ./witness_node --genesis-json genesis.json >> witness_node.log 2>&1 &")
+        os.system("cp ./cocos-bcx-node-bin/fullnode/testnet/0.7.18/linux/witness_node.tar.gz ./scripts/chain/single_witness_node")
+        os.chdir("./scripts/chain/single_witness_node/")
+        os.system("tar -zxvf ./witness_node.tar.gz")
+        os.system("chmod 777 ./witness_node")
+        os.system("pwd")        
+        ret = os.system("nohup ./witness_node --genesis-json genesis.json >> witness_node.log 2>&1 &")
+        return ret
     
-    def stop(self):  
+    def stop(self):   #stop network
+        ret = os.system("pkill witness_node")
+        return ret
+
+    def resume(self): #resume last witness
         os.system("pkill witness_node")
-    
-    def resume(self): 
-        os.system("")
+        ret = os.system("nohup ./witness_node --genesis-json genesis.json >> witness_node.log 2>&1 &") 
+        return ret
+
+    def clean(self):  #clean dirty data
+         ret = os.system("./witness_node --genesis-json genesis.json --resync-blockchain") 
+         return ret
     
     def reset(self): 
         os.system("")
 
-    def build_contract(self): 
-        os.system("")
+    def build_contract(self,contractName,data):  
+        ret = gph.create_contract(contractName, data=data, con_authority="COCOS7zTDZjZBiJPJpVg6jJiJLyzuGafrKz81jMBbRtVdRYQhoZ53Qk", account="developer") 
+        return ret
 
