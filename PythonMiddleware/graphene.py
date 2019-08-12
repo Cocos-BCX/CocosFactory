@@ -2438,15 +2438,15 @@ class Graphene(object):
         os.system("cd ../scripts/chain/single_witness_node")
         os.system("nohup ./witness_node --genesis-json genesis.json >> witness_node.log 2>&1 &")
     
-    def stop(self):  # stop testnet
+    def stop(self):  
         os.system("pkill witness_node")
     
-    def resume(self):  # resume testnet
+    def resume(self): 
         os.system("")
     
-    def reset(self):  # r testnet
+    def reset(self): 
         os.system("")
 
-   def build_contract(self):  # resume testnet
+    def build_contract(self): 
         os.system("")
 
