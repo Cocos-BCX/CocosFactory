@@ -284,6 +284,46 @@ class Graphene(object):
         })
         return self.finalizeOp(op, account, "active")
 
+#import_balance official-account ["5KAUeN3Yv51FzpLGGf4S1ByKpMqVFNzXTJK7euqc3NnaaLz1GJm"] true
+'''
+class Balance_claim(GrapheneObject):
+    def __init__(self, *args, **kwargs):
+        if isArgsThisClass(self, args):
+            self.data = args[0].data
+        else:
+            if len(args) == 1 and len(kwargs) == 0:
+                kwargs = args[0]
+            prefix = kwargs.get("prefix", default_prefix)
+            super().__init__(OrderedDict([
+                ('fee', Asset(kwargs["fee"])),
+                ('deposit_to_account', ObjectId(kwargs["deposit_to_account"], "account")),
+                ('balance_to_claim', ObjectId(kwargs["balance_to_claim"], "balance")),
+                ('balance_owner_key', PublicKey(kwargs["balance_owner_key"], prefix=prefix)),
+                ('total_claimed', Asset(kwargs["total_claimed"]))
+            ]))
+    
+    def importBalance(account, key):
+            #balance_claim_operation  Balance_claim
+        if not account:
+            if "default_account" in config:
+                account = config["default_account"]
+        if not account:
+            raise ValueError("You need to provide an account")
+
+        account = Account(account, graphene_instance=self)
+
+        op = operations.Balance_claim(**{
+            "fee": {"amount": 0, "asset_id": "1.3.0"},
+            "deposit_to_account": account["id"],
+            "balance_to_claim": #to["id"],
+            "total_claimed": #total_claimed
+            "prefix": self.rpc.chain_params["prefix"]
+        })
+        return self.finalizeOp(op, account, "active")
+'''
+
+
+
     def transferWithExtensions(self, to, amount, asset, memo="",extensions=[], account=None):
         """ Transfer an asset to another account.
 

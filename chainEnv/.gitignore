@@ -1,0 +1,6 @@
+/wallet
+cli_wallet
+witness_node
+/witness_node_data_dir
+*.log
+
