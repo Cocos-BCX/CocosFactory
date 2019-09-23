@@ -38,17 +38,23 @@ config["default_account"] = defaultAccount # 向钱包数据库中添加默认�
 #pprint(gph.wallet.getAccounts())
 
 #合约创建
-contract_name = "contract.debug.hello"
+contract_name = "contract.test1.hello"
 data = "function hello() \
     chainhelper:log('Hello World!') \
     chainhelper:log(date('%Y-%m-%dT%H:%M:%S', chainhelper:time())) \
 end "
-pprint(gph.create_contract(contract_name, data=data, con_authority=pub, account=defaultAccount))
+#pprint(gph.create_contract(contract_name, data=data, con_authority=pub, account=defaultAccount))
 
 #合约调用: contract.debug.hello
 value_list=[]
-pprint(gph.call_contract_function(contract_name, "hello", value_list=value_list, account=defaultAccount))
+#pprint(gph.call_contract_function(contract_name, "hello", value_list=value_list, account=defaultAccount))
 
+
+revise_data = "function hello() \
+    chainhelper:log('hello revise contract test. 2019-08-20 11:13:15') \
+    chainhelper:log(date('%Y-%m-%dT%H:%M:%S', chainhelper:time())) \
+end "
+pprint(gph.revise_contract(contract_name, data=revise_data, account=defaultAccount))
 
 #test result data:
 #1. 创建合约

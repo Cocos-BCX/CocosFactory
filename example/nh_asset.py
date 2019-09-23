@@ -34,23 +34,20 @@ config["default_prefix"] = gph.rpc.chain_params["prefix"] # 向钱包数据库�
 config["default_account"] = defaultAccount # 向钱包数据库中添加默认信息
 
 #account test
-pprint(gph.wallet.removeAccount(None))
-#pprint(gph.wallet.getAccounts())
+# pprint(gph.wallet.removeAccount(None))
+# pprint(gph.wallet.getAccounts())
 
-#创建账号
-try:
-    print("create account test")
-    pprint(gph.create_account(account_name="test4", password="123456"))
-except Exception as e:
-    print(repr(e))
-    gph.wallet.removeAccount(None)
-pprint(gph.wallet.getAccounts())
+#说明：下面测试示例中的object_id，请根据自己测试环境实际需要进行修改
+account="nicotest"
+pprint(gph.register_nh_asset_creator(account))
+pprint(gph.create_world_view("snacktest", account))
 
-print("-----------------------------------")
-pub1="COCOS5Wm8pFHkVqwnTPcCXbCnrNahCXNjta6RvxmRDHnSfzP3ufPh4F"
-pprint(gph.wallet.getPrivateKeyForPublicKey(pub1))
+pprint(gph.create_nh_asset(account, "COCOS", "snacktest", '{"name":"test1"}', account))
+pprint(gph.delete_nh_asset("4.2.4", account))
+pprint(gph.transfer_nh_asset("test1", "4.2.5", account))
 
-pub2="COCOS5EaFKYmLoD7iyQV8ZzVL7taWdgYdTAdSURvWx2vk87ZmskvoUv"
-pprint(gph.wallet.getPrivateKeyForPublicKey(pub2))
-
+pprint(gph.create_nh_asset_order("test1", 1, "1.3.0", "4.2.4", " sell nh asset order test ", 100, "1.3.0", account))
+pprint(gph.create_nh_asset_order("test1", 1, "1.3.0", "4.2.6", " sell nh asset order test ", 100, "1.3.0", account))
+pprint(gph.cancel_nh_asset_order("4.3.1", account))
+pprint(gph.fill_nh_asset_order("4.3.2", account))
 
